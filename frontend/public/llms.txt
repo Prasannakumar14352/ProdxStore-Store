@@ -1,0 +1,21 @@
+# ProdXStore
+
+Website: https://prodxstore.com/
+
+> ProdXStore is a catalogue of digital products for content creators, featuring CreatorFlow AI. It helps creators spend less time on content work by keeping their tools in one place.
+
+## Who it serves
+YouTubers, Instagram and LinkedIn creators, coaches, educators, freelancers and small business owners who make content.
+
+## Products
+- [CreatorFlow AI on ProdXStore](https://prodxstore.com/product/creatorflow-ai) · [CreatorFlow AI site](https://creatorflowai.prodxstore.com/): AI content studio that turns one idea into videos, ads, carousels, thumbnails, captions and posts, in 100+ languages.
+- [CreatorFlow AI plans](https://creatorflowai.prodxstore.com/pricing): current plans, credit packs and offers.
+- [The Mega AI Prompt Vault](https://megaprompt.prodxstore.com/): organized prompt collections for ChatGPT, Claude, Gemini, Midjourney, Sora and more.
+- [100,000+ AI Mega Prompts Pack](https://promptspack.prodxstore.com/): ready-to-use prompts organized into 25+ categories.
+- [14,000+ Printable Learning Activities Bundle for Kids](https://kids.prodxstore.com/): screen-free worksheets, puzzles and activities for children aged 3–10.
+
+## Site sections
+About, Services (creator workflows), Shop (searchable catalogue), Pricing, Gallery (real product previews), Testimonials, FAQ (access and billing), Contact (customer support).
+
+## Contact
+Support: prodxstoresupport@gmail.com
