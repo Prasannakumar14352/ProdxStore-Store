@@ -6,7 +6,7 @@ const FAQS = [
   ["Is access lifetime or a subscription?", "Each product card shows its billing period. One-time products are pay once, own forever, with updates included. CreatorFlow AI has a free plan, monthly and yearly subscriptions, and lifetime options on its pricing page."],
   ["What is the difference between monthly and yearly on CreatorFlow AI?", "Yearly is the same plan billed once per year — you save about 17% compared to paying month-to-month, and you receive 12× the monthly credits upfront."],
   ["Do CreatorFlow AI credits expire?", "Credits from one-time credit packs never expire and stack on top of any plan. Media credits are only spent after you approve a scene, and failed generations are refunded."],
-  ["Where do I pay, and is it secure?", "Checkout happens on each product's own page. The “Buy now” and “See plans” buttons take you straight there."],
+  ["Where do I pay, and is it secure?", "“Buy now” opens our secure checkout at pay.prodxstore.com, powered by Razorpay (UPI, cards and netbanking). Subscription products like CreatorFlow AI are paid on their own pricing page."],
   ["Can I use the products in client work?", "Yes — catalogue products come with a commercial license for client projects, internal tools or your own products, and CreatorFlow AI outputs can be used in client work and monetized content."],
   ["What if something goes wrong with my purchase?", "Send us a message through the Contact form below with your order email and what happened. Refund terms are listed on each product's own page."],
 ];

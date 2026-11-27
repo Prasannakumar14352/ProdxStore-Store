@@ -1,38 +1,14 @@
-import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
-import { API, api } from "./api";
 
-let clientPromise = null;
+// One shared ProdXStore database: the same Supabase project powers prodxstore.com,
+// pay.prodxstore.com (checkout) and admin.prodxstore.com (dashboard).
+// The publishable key is safe in the browser; row-level security decides what visitors can read or write.
+export const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL || "https://xjqbhktzhhivbpgnqwgm.supabase.co";
+export const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_KEY || "sb_publishable_rTmxuh-mF0wnGzqOV2VEQA_3zYCZMc_";
 
-// The Supabase project URL + public anon key come from the backend, so they're configured in one place.
-export const getSupabase = () => {
-  if (!clientPromise) {
-    clientPromise = axios.get(`${API}/config`).then(({ data }) =>
-      createClient(data.supabase_url, data.supabase_anon_key, {
-        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: "pkce" },
-      })
-    );
-  }
-  return clientPromise;
-};
-
-// Attach the admin's Supabase session to API calls once sign-in has been initialised.
-api.interceptors.request.use(async (config) => {
-  if (!clientPromise) return config;
-  const sb = await clientPromise;
-  const { data } = await sb.auth.getSession();
-  const token = data.session?.access_token;
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
+export const sb = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: false, autoRefreshToken: false },
 });
 
-export const signInWithGoogle = async () => {
-  const sb = await getSupabase();
-  // Must be listed under Supabase → Authentication → URL Configuration → Redirect URLs.
-  await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: `${window.location.origin}/admin` } });
-};
-
-export const signOut = async () => {
-  const sb = await getSupabase();
-  await sb.auth.signOut();
-};
+export const CHECKOUT_BASE = process.env.REACT_APP_CHECKOUT_URL || "https://pay.prodxstore.com";
+export const ADMIN_URL = process.env.REACT_APP_ADMIN_URL || "https://admin.prodxstore.com";

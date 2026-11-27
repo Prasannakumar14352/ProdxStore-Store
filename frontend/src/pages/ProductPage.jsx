@@ -13,8 +13,7 @@ import { ProductReviews, RelatedProducts, RatingSummary } from "../components/st
 import { Skeleton } from "../components/ui/skeleton";
 
 const ShareButtons = ({ p }) => {
-  // The /api/share link serves this product's own preview card to WhatsApp & social apps, then opens this page.
-  const shareUrl = `${window.location.origin}/api/share/${p.id}`;
+  const shareUrl = `${window.location.origin}/product/${p.id}`;
   const copy = async () => {
     await navigator.clipboard.writeText(shareUrl).catch(() => {});
     toast.success("Link copied — paste it anywhere to share");

@@ -27,4 +27,3 @@ Allow: /api/sitemap.xml
 Disallow: /api/
 Disallow: /admin
 
-Sitemap: https://prodxstore.com/api/sitemap.xml

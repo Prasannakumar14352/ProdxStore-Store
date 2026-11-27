@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/admin", "destination": "https://admin.prodxstore.com", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/((?!static/|.*\\.[a-z0-9]+$).*)", "destination": "/index.html" }
+  ]
+}
