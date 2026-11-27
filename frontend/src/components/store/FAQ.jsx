@@ -8,7 +8,7 @@ const FAQS = [
   ["Do CreatorFlow AI credits expire?", "Credits from one-time credit packs never expire and stack on top of any plan. Media credits are only spent after you approve a scene, and failed generations are refunded."],
   ["Where do I pay, and is it secure?", "“Buy now” opens our secure checkout at pay.prodxstore.com, powered by Razorpay (UPI, cards and netbanking). Subscription products like CreatorFlow AI are paid on their own pricing page."],
   ["Can I use the products in client work?", "Yes — catalogue products come with a commercial license for client projects, internal tools or your own products, and CreatorFlow AI outputs can be used in client work and monetized content."],
-  ["What if something goes wrong with my purchase?", "Send us a message through the Contact form below with your order email and what happened. Refund terms are listed on each product's own page."],
+  ["What if something goes wrong with my purchase?", "Every ProdXStore product comes with a 7-day money-back guarantee. Send us a message through the Contact form below with your order email and what happened, and we'll fix it or refund you in full."],
 ];
 
 export const FAQ = () => (
