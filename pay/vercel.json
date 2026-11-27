@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/checkout/:slug", "destination": "/index.html" },
+    { "source": "/order/:id", "destination": "/index.html" },
+    { "source": "/d/:token", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/d/(.*)", "headers": [{ "key": "Referrer-Policy", "value": "no-referrer" }, { "key": "X-Robots-Tag", "value": "noindex" }] }
+  ]
+}
