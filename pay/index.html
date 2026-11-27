@@ -99,6 +99,8 @@ const SUPABASE_URL = "https://xjqbhktzhhivbpgnqwgm.supabase.co";
 const SUPABASE_KEY = "sb_publishable_rTmxuh-mF0wnGzqOV2VEQA_3zYCZMc_";
 const API = SUPABASE_URL + "/functions/v1/pxs-checkout";
 const SUPPORT = "prodxstoresupport@gmail.com";
+// Meta pixel for ad tracking. Only loaded on /checkout pages, never on /order or /d (those URLs are private links).
+const META_PIXEL_ID = "";
 
 const $ = (s) => document.querySelector(s);
 const app = $("#app");
@@ -119,6 +121,16 @@ const qs = new URLSearchParams(location.search);
 const slug = qs.get("p") || (path[0] === "checkout" ? path[1] : null);
 const orderId = qs.get("order") || (path[0] === "order" ? path[1] : null);
 const dlToken = path[0] === "d" ? path[1] : null;
+
+const trackAds = !!(META_PIXEL_ID && slug && !dlToken && !orderId);
+function px(...args) { try { if (trackAds && window.fbq) window.fbq(...args); } catch (_) {} }
+if (trackAds) {
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+  s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  window.fbq("init", META_PIXEL_ID);
+  window.fbq("track", "PageView");
+}
 
 if (dlToken) loadDownload(dlToken);
 else if (orderId) loadBalance(orderId);
@@ -184,6 +196,8 @@ async function loadProduct(slug) {
     $("#err").textContent = "";
     const plan = $('input[name="plan"]:checked')?.value || "full";
     const btn = $("#payBtn"); btn.disabled = true; const label = btn.textContent; btn.textContent = "Opening payment…";
+    px("track", "InitiateCheckout", { content_ids: [slug], content_name: p.name, content_type: "product",
+      value: (plan === "deposit" ? deposit : p.price_paise) / 100, currency: "INR" });
     try {
       const session = await api({ action: "create", slug, plan, name: $("#name").value, email: $("#email").value, phone: $("#phone").value });
       openRazorpay(session, () => { btn.disabled = false; btn.textContent = label; });
@@ -210,7 +224,13 @@ function openRazorpay(s, onClose) {
     modal: { ondismiss: onClose },
     handler: async (resp) => {
       app.innerHTML = `<div class="center">Confirming your payment…</div>`;
-      try { showDone(await api({ action: "verify", ...resp })); }
+      try {
+        const r = await api({ action: "verify", ...resp });
+        if (r.order_status === "paid") px("track", "Purchase",
+          { content_ids: [slug], content_name: s.product_name, content_type: "product", value: s.amount / 100, currency: "INR" },
+          { eventID: "purchase-" + r.order_no });
+        showDone(r);
+      }
       catch (e) {
         app.innerHTML = `<div class="card done narrow"><div class="big">⏳</div><h2>Payment received</h2>
           <p>We're confirming it with the bank. Your money is safe. If you don't receive your product, email ${SUPPORT} with this ID.</p>
